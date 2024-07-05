@@ -4,10 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ${{matrix.os}}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository code
@@ -26,3 +23,11 @@ jobs:
       - name: Run tests
         run: |
           pytest
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          image: suma2903/demo-repo
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
