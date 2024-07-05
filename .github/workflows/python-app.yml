@@ -25,7 +25,7 @@ jobs:
           pytest
 
       - name: Build and Push Docker Image
-        uses: docker/build-push-action@v6
+        uses: mr-smithers-excellent/docker-build-push@v4
         with:
           image: suma2903/demo-repo
           registry: docker.io
